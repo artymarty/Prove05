@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Prove05</string>
+    <string name="book">Enter your favorit book</string>
+    <string name="chapter">Chapter</string>
+    <string name="verse">Verse</string>
+</resources>
