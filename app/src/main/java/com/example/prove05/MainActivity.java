@@ -11,10 +11,10 @@ import android.view.View;
 import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
-    public static final String EXTRA_BOOK = "com.example.prove05.MESSAGE";
-    public static final String EXTRA_CHAPTER = "";
-    public static final String EXTRA_VERSE = "";
-    public static final String EXTRA_MESSAGE = "";
+    public static final String EXTRA_BOOK = "book";
+    public static final String EXTRA_CHAPTER = "chapter";
+    public static final String EXTRA_VERSE = "verse";
+    public static final String EXTRA_MESSAGE = "message";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,12 +22,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void displayBook(View view) {
-        EditText editBook = (EditText) findViewById(R.id.bookName);
+        EditText editBook = findViewById(R.id.bookName);
         String message = editBook.getText().toString();
-        EditText editChapter = (EditText) findViewById(R.id.chapterNumber);
+        EditText editChapter = findViewById(R.id.chapterNumber);
         message += " ";
         message += editChapter.getText().toString();
-        EditText editVerse = (EditText) findViewById(R.id.verseNumber);
+        EditText editVerse = findViewById(R.id.verseNumber);
         message += ":";
         message += editVerse.getText().toString();
         String TAG = "mainTAG";
@@ -40,14 +40,16 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void loadBookmark() {
+    public void loadBookmark(View view) {
         SharedPreferences pref = getSharedPreferences("Data", Context.MODE_PRIVATE);
-        EditText editBook = (EditText) findViewById(R.id.bookName);
+        EditText editBook = findViewById(R.id.bookName);
         String book = pref.getString("Book","");
         editBook.setText(book);
-        EditText editChapter = (EditText) findViewById(R.id.chapterNumber);
-        editChapter.setText(pref.getString())
-        message += editChapter.getText().toString();
-        EditText editVerse = (EditText) findViewById(R.id.verseNumber);
+        EditText editChapter = findViewById(R.id.chapterNumber);
+        editChapter.setText(pref.getString("Chapter", ""));
+        EditText editVerse = findViewById(R.id.verseNumber);
+        editVerse.setText(pref.getString("Verse", ""));
+        Log.v("TAG", "Scripture " + editBook.getText() + " " + editChapter.getText() + ":"
+                                + editVerse.getText() + " loaded.");
     }
 }

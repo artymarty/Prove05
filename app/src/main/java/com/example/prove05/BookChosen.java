@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 public class BookChosen extends AppCompatActivity {
@@ -28,13 +29,15 @@ public class BookChosen extends AppCompatActivity {
         textView.setText(message);
     }
 
-    private void saveBookmark() {
+    public void saveBookmark(View view) {
+        Intent intent = getIntent();
         SharedPreferences pref = getSharedPreferences("Data", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
-        editor.putString("Book", MainActivity.EXTRA_BOOK.toString());
-        editor.putString("Chapter", MainActivity.EXTRA_CHAPTER.toString());
-        editor.putString("Verse", MainActivity.EXTRA_VERSE.toString());
-        editor.commit();
-        Log.v("TAG", "Preferences saved.");
+        editor.putString("Book", intent.getStringExtra(MainActivity.EXTRA_BOOK));
+        editor.putString("Chapter", intent.getStringExtra(MainActivity.EXTRA_CHAPTER));
+        editor.putString("Verse", intent.getStringExtra(MainActivity.EXTRA_VERSE));
+        editor.apply();
+        Log.v("TAG", "Bookmark " + intent.getStringExtra(MainActivity.EXTRA_MESSAGE)
+                                + " saved.");
     }
 }
